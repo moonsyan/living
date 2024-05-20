@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.hspedu</groupId>
+    <artifactId>hspliving</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <modules>
+        <module>hspliving-commodity</module>
+        <module>renren-fast</module>
+        <module>renren-generator</module>
+        <module>hspliving-common</module>
+        <module>hspliving-service</module>
+        <module>hspliving-gateway</module>
+    </modules>
+
+    <packaging>pom</packaging>
+
+    <name>hspliving</name>
+    <description>顺平(家居生活)-聚合微服务模块</description>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring-cloud.version>2020.0.5</spring-cloud.version>
+    </properties>
+</project>
