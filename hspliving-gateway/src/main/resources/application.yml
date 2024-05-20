@@ -1,0 +1,54 @@
+server:
+  port: 5050
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    gateway:
+      routes:
+          # 当前的配置 ：
+          # 如果到网关的请求时http://localhost:5050/commodity/brand/List
+          # 则gateway会将路由转发到到  http://localhost:9090/commodity/brand/list
+#        - id: test-route01 # 路由id，由程序员指定，要求唯一
+##          uri: lb://hspliving-service-provider # 路由的目标地址，http代表固定地址，lb代表根据服务名负载均衡
+#          uri: http://localhost:9090
+#          predicates:
+#            - Path=/commodity/brand/list
+#        - id: test-route02 # 路由id，由程序员指定，要求唯一
+#          uri: http://news.baidu.com
+#          predicates:
+#            - Path=/guoji
+
+        - id: hspliving-commodity # 路由id，由程序员指定，要求唯一
+          uri: lb://hspliving-commodity
+          predicates:
+            - Path=/api/commodity/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+
+        - id: hspliving-service # 路由id，由程序员指定，要求唯一
+          uri: lb://hspliving-service
+          predicates:
+            - Path=/api/service/**
+          filters:
+            - RewritePath=/api/service/(?<segment>.*), /$\{segment}
+
+        #当前配置完成的需求
+        #如果到网关的请求是http:/ocalhost:5050/api/??/??/??,gateway通过断言
+        #最终将请求路由转发到http:renren-fast[注册到nacos的renren-fast服务ip+端口]/？？/？？/？？=
+        #  因为我们要去掉断言到的Pαth 的/api，所以需要路径重写
+        - id: renren-fast # 路由id，由程序员指定，要求唯一
+          uri: lb://renren-fast
+          predicates:
+            - Path=/api/**
+          filters:
+            # 路径重写，/api/??/??/?? 转发到 http://localhost:8080/renren-fast/??/??/??
+            - RewritePath=/api/(?<segment>.*), /renren-fast/$\{segment}
+        - id: hspliving-host-route # 路由id，由程序员指定，要求唯一
+          uri: lb://hspliving-commodity
+          predicates:
+            - Host=**.hspliving.com
+
+  application:
+    name: hspliving-gateway
