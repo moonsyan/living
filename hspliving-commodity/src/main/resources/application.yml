@@ -1,0 +1,40 @@
+spring:
+  datasource:
+    username: root
+    password: computer99...
+    url: jdbc:mysql://192.168.56.100:3306/hspliving_commodity?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    alicloud:
+      oss:
+        endpoint: oss-cn-beijing.aliyuncs.com
+
+      access-key: LTAI5tKDhJHwxkAomYKC5f39
+      secret-key: LcR6G06F2FGmcSLlcWgA5RhGbrS7L0
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  application:
+    name: hspliving-commodity
+
+
+
+  # 1.关闭thymeleaf的缓存，这样当前端贡面变化时，就可以看到效果
+  # 2.在实际的生产环境，需要将cache设置tUe,开启缓存，提高效率
+  thymeleaf:
+    cache: false
+
+
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+  global-config:
+    db-config:
+      # 配置主键自增
+      id-type: AUTO
+      logic-delete-value: 0  # 逻辑删除值
+      logic-not-delete-value: 1 # 逻辑未删除值
+
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
