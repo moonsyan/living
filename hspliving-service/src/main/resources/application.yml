@@ -1,18 +1,1 @@
-#server:
-#  port: 7070
-#spring:
-#  cloud:
-#    alicloud:
-#      oss:
-#        endpoint: oss-cn-beijing.aliyuncs.com
-#        bucket: hspliving-10001
-#
-#      access-key: LTAI5tKDhJHwxkAomYKC5f39
-#      secret-key: LcR6G06F2FGmcSLlcWgA5RhGbrS7L0
-#    nacos:
-#      discovery:
-#        server-addr: 127.0.0.1:8848
-#
-#  application:
-#    name: hspliving-service
-#
+
